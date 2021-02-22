@@ -4,7 +4,7 @@ import numpy as np
 import sys
 
 TASK_NUM = int(sys.argv[1])    # These are command line arguments, so when running, type: program.py arg1 arg2 ...
-RESOLUTION = int(sys.argv[2])  # Note that its a space, -s is called options
+RESOLUTION = int(sys.argv[2])  # Note that its a space, -o is called options
 LOCALITY = float(sys.argv[3])
 EXPANSION = float(sys.argv[4])
 
