@@ -26,6 +26,6 @@ I didn't get to finish coding the Trapper, but I did finish coding a first versi
 
 ***NOTE***: During this competition, we were allowed to take code from the internet, so the density algorithm of Circle Covers is not mine, and the primes generator was also not mine.
 
-Knerl Density Estimation (from Circle Covers): https://stackoverflow.com/questions/57539749/find-out-centre-of-the-most-dense-region-in-a-scatter-plot
+Kernel Density Estimation (from Circle Covers): https://stackoverflow.com/questions/57539749/find-out-centre-of-the-most-dense-region-in-a-scatter-plot
 
 Sieve of Eratosthenes (from Unique Products): https://stackoverflow.com/questions/567222/simple-prime-number-generator-in-python (scroll down to find Peter Mølgaard Pallesen's answer)
