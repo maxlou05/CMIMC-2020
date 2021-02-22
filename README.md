@@ -3,8 +3,7 @@
 
 The contest is done in teams of 3. It has two parts: an optimization round and an AI round. Each round has 3 questions.
 
-Our team split the work by having one person do one question per round.
-Later, I helped out my friend as I finished mine.
+Our team split the work by having one person do one question per round. If we are done, then we would help eachother out.
 
 # Optimization round
 (Circle Covers & Unique Products)
