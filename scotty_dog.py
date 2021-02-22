@@ -56,7 +56,7 @@
 # currently named "scotty_bot" and "trapper_bot" will be run officially.
 
 
-# Example Scotty bot that makes a random move:
+
 import random
 
 class scotty_bot:
@@ -77,33 +77,34 @@ class scotty_bot:
     
     def count(self, board, mode, x, y):
         blockades = 0
-        # Check up
+        # If the input is out of the board
         if x < 0 or x > 14 or y < 0 or y > 14:
             return 0
+        # Count how many are above
         if mode == 'u':
             for i in range(y+1, 15):
                 for j in range(15):
                     if board[i][j] > 1:
                         blockades += 1
-        # Check down
+        # Count how many are below
         elif mode == 'd':
             for i in range(0, y):
                 for j in range(15):
                     if board[i][j] > 1:
                         blockades += 1
-        # Check left
+        # Count how many are on the left
         elif mode == 'l':
             for i in range(15):
                 for j in range(0, x):
                     if board[i][j] > 1:
                         blockades += 1
-        # Check right
+        # Count how many are on the right
         elif mode == 'r':
             for i in range(15):
                 for j in range(x+1, 15):
                     if board[i][j] > 1:
                         blockades += 1
-        # Check around
+        # Count how many are surrounding
         elif mode == 'o':
             xl = x-1
             xh = x+2
@@ -158,7 +159,7 @@ class scotty_bot:
                     skip = False
                     dx = table[d[1]][s][0]
                     dy = table[d[1]][s][1]
-                    # Don't repeat
+                    # Don't repeat (don't go back to where came from, otherwise may cause infinite loop. However, it still may infinite loop anyways)
                     for i in self.path:
                         if (x + dx, y + dy) == i:
                             skip = True
@@ -245,7 +246,7 @@ class trapper_bot:
 
     def move(self, board):
         # You should write your code that moves every turn here
-        # Random
+        # This is the placing them randomly, provided by the starter code
         # moves = [(x, y) for x in range(15) for y in range(15)]
         # while moves:
         #     x, y = moves.pop(random.randrange(len(moves)))
@@ -253,6 +254,7 @@ class trapper_bot:
         #         return (x, y)
         # return (0, 0)
 
+        # *** UNFINISHED***
         # Strategy1: Find where Scotty is mostly heading and block in that direction
         # Make sure to block where block touches at least 2 sides (optimal position), 1 is ok, 0 is useless
         x, y = self.find_scotty(board)
