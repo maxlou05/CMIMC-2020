@@ -24,7 +24,7 @@ For Unique Products, I got a simple strategy that worked and found results, but 
 I didn't get to finish coding the Trapper, but I did finish coding a first version of Scotty. Didn't place too well, but had a win rate of ~55%, while the best team's was ~65%.
 
 
-*NOTE: During this competition, we were allowed to take code from the internet, so the density algorithm of Circle Covers is not mine, and the primes generator was also not mine.
+***NOTE***: During this competition, we were allowed to take code from the internet, so the density algorithm of Circle Covers is not mine, and the primes generator was also not mine.
 
 Knerl Density Estimation (from Circle Covers): https://stackoverflow.com/questions/57539749/find-out-centre-of-the-most-dense-region-in-a-scatter-plot
 
