@@ -31,6 +31,7 @@ centers = []
 
 
 
+# Knerel Density Estimation - not mine
 dx = max(pts_x) - min(pts_x)
 dy = max(pts_y) - min(pts_y)
 
@@ -78,15 +79,18 @@ def _kde(x, y):
 
 kde = np.vectorize(_kde)  # Let numpy care for applying our kde to a vector
 z = kde(x, y)
+
 print(z.shape)
 zc = np.copy(z)
 
+# Save the density results to use later
 zfile = open('z_array{}_LOCALITY{}_RES{}.npy'.format(TASK_NUM, LOCALITY, RESOLUTION), 'wb')
 np.save(zfile, z)
 zfile.close()
 
 
 
+# Finding the points to put the centers
 step = 0
 stepc = 0
 x_lo = 0
@@ -101,15 +105,16 @@ y_hic = 0
 
 
 for c in range(len(radii)):
-    xi, yi = np.where(z == np.amax(z))
+    xi, yi = np.where(z == np.amax(z))  # Returns the point where the density is highest
     print(xi, yi)
 
-    max_x = grid_x[yi][0]  # For some reason this is reversed, so I un-reversed it by double reversing.
+    max_x = grid_x[yi][0]  # For some reason this is reversed, so I un-reversed it by double reversing
     max_y = grid_y[xi][0]
     print(f"{max_x:.4f}, {max_y:.4f}")
 
     centers.append((max_x, max_y))
 
+    # Drawing graphs
     if c == 0:
         # fig, ax = plt.subplots()
         # ax.scatter(pts_x, pts_y, marker='.', color='blue')
@@ -124,8 +129,8 @@ for c in range(len(radii)):
         fig.savefig('D:\Programs\Python programs\CMIMC\density{}_LOCALITY{}_RES{}.png'.format(TASK_NUM, LOCALITY, RESOLUTION), bbox_inches='tight')
         # fig.show()
 
-    step = math.ceil(radii[c]*EXPANSION/delta)
-    stepc = math.ceil(radii[c]/delta)
+    step = math.ceil(radii[c]*EXPANSION/delta)  # EXPANSION is used to determine how much larger the area to not put the center is compared to the circle
+    stepc = math.ceil(radii[c]/delta)  # All of the variables with c behind them are just copies and are used for graphing purposes only
     x_lo = xi[0] - step
     x_hi = xi[0] + step
     y_lo = yi[0] - step
@@ -142,6 +147,8 @@ for c in range(len(radii)):
             if j >= z.shape[1]:
                 continue
             # print(i,j)
+            # Set the density of the approximate area covered by the circle and more to 0 (square with sidelenghth radius*EXPANSION)
+            # (it's so that the circles don't overlap as much)
             z[i][j] = 0
             if i >= x_loc and i <= x_hic and j >= y_loc and j <= y_hic:
                 zc[i][j] = 0
@@ -162,7 +169,7 @@ ax.pcolormesh(x, y, z, cmap='inferno', vmin=np.min(z), vmax=np.max(z))
 fig.set_size_inches(4, 4)
 fig.savefig('D:\Programs\Python programs\CMIMC\density_covered_L{}_LOCALITY{}_RES{}.png'.format(TASK_NUM, LOCALITY, RESOLUTION), bbox_inches='tight')
 
-# change to whatever you want your output file to be called
+# Writing output file
 out = open('D:\Programs\Python programs\CMIMC\CirclesT{}.txt'.format(TASK_NUM), 'w')
 for t in range(len(centers)):
     out.write(str(centers[t]).replace(",","").replace("(","").replace(")",""))
