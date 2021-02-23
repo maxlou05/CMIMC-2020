@@ -4,8 +4,8 @@ import math
 import copy
 
 TASK_NUM = 5
-LOCALITY = 100    #Task1+2: ?, Task3+4: 8, Task5+6: specified
-RESOLUTION = 200  #Just use min(graph.size) to figure out.
+LOCALITY = 100
+RESOLUTION = 200  # Just use min(graph.size) to figure out if don't know
 MAX_EXPANSION = 2.3
 EXP_RES = 13
 MOVE_DIST = 100
@@ -70,6 +70,11 @@ print(pts.shape)
 print(LOCALITY)
 
 
+# Counts how many points the circle at this center covers given:
+# rx is x-value of circle's center
+# ry is y-value of circle's center
+# r is radius of the circle
+# p is list of points
 def count(rx, ry, r, p):
     score = 0
     pi = []
@@ -91,7 +96,9 @@ graphc = np.copy(graph)
 for i in range(len(radii)):
     centers2.append([0,0,0])
 
+# Testing different values of EXPANSION (e represents EXPANSION)    *see Graph_density.py to see what that means
 for e in espace:
+    # First test, calculate the original centers score
     totalscore = 0
     centers.clear()
     graphc = np.copy(graph)
@@ -110,7 +117,7 @@ for e in espace:
         if(len(s[1])>0):
             ptsc = np.delete(ptsc, s[1])
         
-        step = math.ceil(radii[r]*e/delta)
+        step = math.ceil(radii[r]*e/delta) # As seen, e represents EXPANSION
         x_lo = xi[0] - step
         x_hi = xi[0] + step
         y_lo = yi[0] - step
@@ -124,7 +131,8 @@ for e in espace:
                     continue
                 graphc[i][j] = 0
 
-
+    
+    # Save the scores
     print("-----loop----- score:" + str(totalscore) + ", bestscore:" + str(bestscore)  )
 
     if totalscore > bestscore:
@@ -138,7 +146,8 @@ for e in espace:
         centers2[b][1] = 0
         centers2[b][2] = 0
     ptsc = np.copy(pts)
-
+    
+    # Now, move the center around by in an area defined by MOVE_DIST and a resolution defined by MOVE_RES (resolution as in how large each step is)
     for c in range(len(centers)):
         xspace = np.linspace(centers[c][0]-MOVE_DIST, centers[c][0]+MOVE_DIST, num=MOVE_RES)
         yspace = np.linspace(centers[c][1]-MOVE_DIST, centers[c][1]+MOVE_DIST, num=MOVE_RES)
@@ -146,7 +155,7 @@ for e in espace:
         for i in xspace:
             for j in yspace:
                 s = count(i, j, radii[c], ptsc)
-                if s[0] > centers2[c][2]:
+                if s[0] > centers2[c][2]:  # Save the centers of highest score (for the current EXPANSION value/setting)
                     centers2[c][0] = i
                     centers2[c][1] = j
                     centers2[c][2] = s[0]
@@ -157,13 +166,14 @@ for e in espace:
 
 
     if totalscore > bestscore:
-        bestcenters =copy.deepcopy(centers2)
+        bestcenters = copy.deepcopy(centers2)
         bestscore = totalscore
         print("-------best--------" + str(bestscore))
 
 print("------------bestscore----------- " + str(bestscore))
 # print("-----------bestcenters---------- " + str(bestcenters))
 
+# This is just a final check that calcualtes the score of the best centers again for trouble shooting purposes
 totalscore = 0
 ptsc = np.copy(pts)
 for yay in range(len(radii)):
