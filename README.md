@@ -12,7 +12,7 @@ Circle Covers: You are given a list of points and a list of radii (the length). 
 
 Unique Products: You are given 2 integers *N* and *M*. You are to find *N* distinct sets of natural numbers of the same length composed of elemtents found within the set {1, 2, 3, ... *M*}. These *N* distinct sets must satisfy the following condition: the product of any two elemtents from different sets must be unique.
 
-My main question is Circle Covers, which I got a score of ~95%, ranking ~top 10%, but my programs took like days to run.
+My main question is Circle Covers, which I got a score of ~95%, ranking ~top 10%, but my programs took many hours to run.
 
 For Unique Products, I got a simple strategy that worked and found results, but it was more math and not as much optimization. Didn't place very well either.
 
@@ -28,4 +28,4 @@ I didn't get to finish coding the Trapper, but I did finish coding a first versi
 
 Kernel Density Estimation (from Circle Covers): https://stackoverflow.com/questions/57539749/find-out-centre-of-the-most-dense-region-in-a-scatter-plot
 
-Sieve of Eratosthenes (from Unique Products): https://stackoverflow.com/questions/567222/simple-prime-number-generator-in-python (scroll down to find Peter Mølgaard Pallesen's answer)
+Sieve of Eratosthenes (from Unique Products): https://stackoverflow.com/questions/567222/simple-prime-number-generator-in-python (I used Peter Mølgaard Pallesen's solution)
